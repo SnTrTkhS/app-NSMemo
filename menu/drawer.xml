@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuCate"
+        android:title="カテゴリ">
+        <menu/>
+    </item>
+    <item
+        android:id="@+id/menuAddCategory"
+        android:onClick="openAddCategoryDialogFragment"
+        android:title="@string/edit_category_dialog_fragment_tv_header" />
+</menu>

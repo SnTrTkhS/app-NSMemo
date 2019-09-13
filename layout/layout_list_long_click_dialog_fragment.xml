@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_corners_radius"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingStart="23dp"
+    android:paddingTop="23dp"
+    android:paddingEnd="23dp"
+    android:paddingBottom="58dp">
+
+    <TextView
+        android:id="@+id/tvCategoryChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/list_long_click_dialog_fragment_categiryset_title"
+        app:layout_constraintEnd_toStartOf="@+id/atvCategories"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/atvCategories"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:dropDownHeight="wrap_content"
+        android:hint="@string/list_long_click_dialog_fragment_atv_categiryset_hint"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCategoryChoice"
+        app:layout_constraintEnd_toStartOf="@+id/btCategorySet"
+        app:layout_constraintStart_toEndOf="@+id/tvCategoryChoice"
+        app:layout_constraintTop_toTopOf="@+id/tvCategoryChoice" />
+
+
+    <Button
+        android:id="@+id/btCategorySet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/list_long_click_dialog_fragment_bt_categiryset_set"
+        app:layout_constraintBottom_toTopOf="@+id/btCategoryRemove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/atvCategories" />
+
+    <Button
+        android:id="@+id/btCategoryRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/list_long_click_dialog_fragment_bt_categiryset_remove"
+        app:layout_constraintBottom_toBottomOf="@+id/atvCategories"
+        app:layout_constraintEnd_toEndOf="@+id/btCategorySet"
+        app:layout_constraintStart_toStartOf="@+id/btCategorySet"
+        app:layout_constraintTop_toBottomOf="@+id/btCategorySet" />
+
+    <View
+        android:id="@+id/vwLine1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCategoryRemove" />
+
+    <Button
+        android:id="@+id/btBodyCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/list_long_click_dialog_fragment_bt_body_copy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vwLine1" />
+
+    <Button
+        android:id="@+id/btDuplication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/list_long_click_dialog_fragment_bt_duplication"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btBodyCopy" />
+
+    <Button
+        android:id="@+id/btTrash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/list_long_click_dialog_fragment_bt_trash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btDuplication" />
+
+    <Button
+        android:id="@+id/btDelete"
+        android:layout_width="127dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:text="@string/list_long_click_dialog_fragment_bt_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btTrash" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

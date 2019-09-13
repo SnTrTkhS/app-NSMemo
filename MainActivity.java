@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             setTitle(menuItem.getTitle().toString());                                                           // タイトルをタップしたカテゴリ名に変更
-            if(menuItem.getTitle().equals( getResources().getString(R.string.navigation_view_menu_trash) )) {   // タップしたのがゴミ箱だったら・・・・・・
+            if(menuItem.getTitle().equals( getString(R.string.navigation_view_menu_trash) )) {   // タップしたのがゴミ箱だったら・・・・・・
                 _trashFlag = 1;                                                                                 // ゴミ箱フラグを1にする。
             }else {                                                                                             // タップしたのがゴミ箱以外だったら・・・・・・
                 _trashFlag = 0;                                                                                 // ゴミ箱フラグを0にする。

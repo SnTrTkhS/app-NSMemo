@@ -45,7 +45,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         // ビルダーにタイトルを渡す。
-        builder.setTitle(R.string.edit_category_dialog_fragment_tv_header);
+//        builder.setTitle(R.string.edit_category_dialog_fragment_tv_header);
 
         //// ビルダーにViewを渡す。
         builder.setView(_view);
@@ -56,7 +56,10 @@ public class EditCategoryDialogFragment extends DialogFragment {
             List<Category> categoryList = categoryDao.getCategoryList();
             _atvCategories = _view.findViewById(R.id.atvCategories2);
             setAutoCompleteTextView(categoryList);
-
+            if(categoryList.size() > 5) {
+                float ratioOfDpToPx = getResources().getDisplayMetrics().density;        // dpからpxへ変換するための比率。
+                _atvCategories.setDropDownHeight( (int)(320 * ratioOfDpToPx + 0.5f) );   // px値でサイズ設定。
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -145,6 +148,15 @@ public class EditCategoryDialogFragment extends DialogFragment {
         ArrayAdapter<String> adapter = new ArrayAdapter(getActivity(), android.R.layout.select_dialog_item, categoryStrs);     // カテゴリタイトル配列をアダプタにセット。
         _atvCategories.setAdapter(adapter);                                                                                    // スピナーにアダプタをセット。
         _atvCategories.setThreshold(1);
+        _atvCategories.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    _atvCategories.showDropDown();
+                }
+            }
+        });
+
         _atvCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

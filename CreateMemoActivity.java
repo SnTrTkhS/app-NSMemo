@@ -43,13 +43,15 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
     private static final boolean[] _falseTrue = {false,true};    // 保存・編集時のEditTextのフォーカス切り替え用boolean。[0]==false, [1]==true 。
     private int _zeroOneId = 0;                                  // [0]と[1]の切り替え用。
 
-    private EditText _etTitle;                                   // タイトル欄
-    private EditText _etBody;                                    // 本文欄
+    private EditText _etTitle;                                   // タイトル入力欄
+    private EditText _etBody;                                    // 本文入力欄
     private EditText[] _etTitleBody = new EditText[2];           // タイトル欄と本文欄を切り替える為の配列。フォーカス位置によるundo,redo処理対象の変更に使用。
     private int _etTitleBodyID = 0;                              // タイトル欄と本文欄を切り替える為の添え字を入れる変数。
 
     private SharedPreferences _prefs;                            // 設定ファイル
     private int _undoDataMax;
+
+    int pushCount = 0;  // オプションメニュー生成前にテキスト入力検知から2回呼ばれるので、それをスルーする為のカウント用変数。(undoList生成する際にsetMenuItemEnabledがエラーを出す為)。
 
 
     @Override
@@ -60,26 +62,26 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
         ActionBar actionBar = getSupportActionBar();                        // アクションバー取得。
         actionBar.setDisplayHomeAsUpEnabled(true);                          // 戻る(Home)ボタン表示。
 
-        _etTitle = findViewById(R.id.etTitle);                              // タイトルのエディットテキスト取得。
-        _etBody = findViewById(R.id.etBody);                                // 本文のエディットテキスト取得。
+        _etTitle = findViewById(R.id.etTitle);                              // タイトル入力欄のエディットテキスト取得。
+        _etBody = findViewById(R.id.etBody);                                // 本文入力欄のエディットテキスト取得。
         _etTitleBody[0] = _etTitle;                                         // 切り替え用の配列に格納。（undo,redo処理対象の変更に使用）
         _etTitleBody[1] = _etBody;                                          //        〃
 
-        _etTitle.addTextChangedListener(CreateMemoActivity.this);   // タイトルにリスナをセット。
-        _etBody.addTextChangedListener(CreateMemoActivity.this);    // 本文にリスナをセット。
+        _etTitle.addTextChangedListener(CreateMemoActivity.this);   // タイトル入力欄にリスナをセット。
+        _etBody.addTextChangedListener(CreateMemoActivity.this);    // 本文入力欄にリスナをセット。
 
-        _etTitle.setOnTouchListener(new onTouchListener());                 // フォーカスを監視するリスナをセット。
-        _etBody.setOnTouchListener(new onTouchListener());                  //        〃
+        _etTitle.setOnTouchListener(new onTouchListener());                  // フォーカスを監視するリスナをセット。
+        _etBody.setOnTouchListener(new onTouchListener());                   //        〃
 
-        TextView tvCreate = findViewById(R.id.tvCreate);                    // 作成日時のテキストビュー取得。
-        TextView tvUpdate = findViewById(R.id.tvUpdate);                    // 更新日時のテキストビュー取得。
+        TextView tvCreate = findViewById(R.id.tvCreate);                     // 作成日時のテキストビュー取得。
+        TextView tvUpdate = findViewById(R.id.tvUpdate);                     // 更新日時のテキストビュー取得。
 
-        _intent = this.getIntent();                                             // 遷移元からインテント取得。
-        _memoId = _intent.getIntExtra("memoId", 0);                    // メモIDを遷移元から取得。
-        _categoryId = _intent.getIntExtra("categoryId", 0);    // カテゴリIDを遷移元から取得。
+        _intent = this.getIntent();                                              // 遷移元からインテント取得。
+        _memoId = _intent.getIntExtra("memoId", 0);           // メモIDを遷移元から取得。
+        _categoryId = _intent.getIntExtra("categoryId", 0);   // カテゴリIDを遷移元から取得。
 
-        SettingValues settingValues = new SettingValues();                      // 設定値クラスを取得
-        float[] textSizes = settingValues.getTextSizes();                       // テキストサイズ用設定値の配列取得
+        SettingValues settingValues = new SettingValues();                       // 設定値クラスを取得
+        float[] textSizes = settingValues.getTextSizes();                        // テキストサイズ用設定値の配列取得
 
         _prefs = getSharedPreferences("SaveData", Context.MODE_PRIVATE);  // 設定ファイル「SaveData」を取得。
 
@@ -97,33 +99,33 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
         }
 
         // 画面表示
-        if(_memoId == -1){                                                                                   // 新規作成の場合
+        if(_memoId == -1){                          // 新規作成の場合
 
-            pushCount = 2;                          // テキスト入力状況検知回数
-            _newFlag = true;
+            pushCount = 2;                          // テキスト入力状況検知回数を2にする。(Undo&Redo機能の為)
+            _newFlag = true;                        // 新規フラグを立てる。
             setTitle(R.string.menu_main_option_add);                    // ページタイトル変更。
             tvCreate.setVisibility(View.GONE);      // 作成日時非表示。
             tvUpdate.setVisibility(View.GONE);      // 更新日時非表示。
         }else {
             _etTitleBodyID = 1;
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);                   // 最初はキーボードを隠す。
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);    // 最初はキーボードを隠す。
 
             try(MemoDao memoDao = new MemoDao(_helper, getResources())) {
 
-                Memo memo = memoDao.getMemoById(_memoId);
+                Memo memo = memoDao.getMemoById(_memoId);                               // メモIDを元にデータベースからメモデータを取得する。
 
-                _etTitle.setText(memo.getTitle(), TextView.BufferType.NORMAL);
-                _etBody.setText(memo.getBody(), TextView.BufferType.NORMAL);
+                _etTitle.setText(memo.getTitle(), TextView.BufferType.NORMAL);          // タイトル入力欄にメモデータのタイトルセット
+                _etBody.setText(memo.getBody(), TextView.BufferType.NORMAL);            // 本文入力欄にメモデータの本文セット
 
-                StringBuilder stringBuilder = new StringBuilder(37);
-                stringBuilder.append(tvCreate.getText().toString());
-                stringBuilder.append(memo.getCreateDateWeekTime());
-                tvCreate.setText(stringBuilder.toString(), TextView.BufferType.NORMAL);
+                StringBuilder stringBuilder = new StringBuilder(37);           // 作成日時の文字列作成
+                stringBuilder.append(tvCreate.getText().toString());                    // 作成日時欄の既存文字列を追加
+                stringBuilder.append(memo.getCreateDateWeekTime());                     // メモデータの作成日時(曜日付き)を追加
+                tvCreate.setText(stringBuilder.toString(), TextView.BufferType.NORMAL); // 作成日時欄に文字列セット
 
-                stringBuilder = new StringBuilder(37);
-                stringBuilder.append(tvUpdate.getText().toString());
-                stringBuilder.append(memo.getUpdateDateWeekTime());
-                tvUpdate.setText(stringBuilder.toString(), TextView.BufferType.NORMAL);
+                stringBuilder = new StringBuilder(37);                         // 更新日時の文字列作成
+                stringBuilder.append(tvUpdate.getText().toString());                    // 更新日時欄の既存文字列を追加
+                stringBuilder.append(memo.getUpdateDateWeekTime());                     // メモデータの更新日時(曜日付き)を追加
+                tvUpdate.setText(stringBuilder.toString(), TextView.BufferType.NORMAL); // 更新日時欄に文字列セット
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -310,7 +312,6 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
 
 
     /** テキスト入力検知 */
-
     private String _beforeTextCharSequence;   // 入力テキスト参照フィールド。
     private int _beforeTextI;                 // 前回入力状況フィールド。
     private int _beforeTextI1;                // 前回入力状況フィールド。
@@ -339,6 +340,7 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
         Log.i("CheckCheckCheck", "unfixInput afterTextChanged" + _unficxInput);
     }
 
+
     /** 入力確定前チェック（確定前：true　確定：false） **/
     private boolean unfixInput(final Editable s) {
         Object[] spanned = s.getSpans(0, s.length(), Object.class);
@@ -355,7 +357,6 @@ public class CreateMemoActivity extends AppCompatActivity implements TextWatcher
 
 
     /** undoList生成 */
-    int pushCount = 0;  // オプションメニュー生成前にテキスト入力検知から2回呼ばれるので、それをスルーする為のカウント用変数。(setMenuItemEnabledがエラーを出す為)。
     public void push(String str, int i, int i1, int i2) {
 
         if (i != _iBack || ( i == _iBack && i1 == 0 && i2 > 0 ) || ( i == _iBack && i1 > 0 && i2 == 0 ) ) {

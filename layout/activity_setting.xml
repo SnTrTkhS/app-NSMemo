@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="23dp"
+    android:paddingEnd="23dp"
+    tools:context=".SettingsActivity">
+
+    <!--View
+        android:id="@+id/line_vertical_center"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:background="@color/borderColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" /-->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="4dp"
+        android:layout_height="wrap_content"
+        android:background="#00DF6F6F"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="177dp" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/tv_setting_text_size"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/tv_setting_text_size_main"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvSettingTextSize"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingTextSize" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeMainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:gravity="end"
+        android:text="@string/tv_setting_text_size_main_and_create_title"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/spSettingTextSizeMainDatetime"
+        app:layout_constraintStart_toEndOf="@+id/spSettingTextSizeMainDatetime"
+        app:layout_constraintTop_toTopOf="@+id/spSettingTextSizeMainDatetime" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeMainTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeMainTitle"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeMainTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeMainTitle" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeMainBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/tv_setting_text_size_main_and_create_body"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeMainTitle"
+        app:layout_constraintStart_toEndOf="@+id/spSettingTextSizeMainTitle" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeMainBody"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeMainBody"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeMainBody"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeMainBody" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeMainDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="end"
+        android:paddingEnd="0dp"
+        android:text="@string/tv_setting_text_size_main_and_create_datetime"
+        app:layout_constraintEnd_toEndOf="@+id/tvSettingTextSizeMain"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingTextSizeMain" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeMainDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeMainDatetime"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeMainDatetime"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeMainDatetime" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tv_setting_text_size_create"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvSettingTextSize"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingTextSizeMainDatetime" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeCreateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/tv_setting_text_size_main_and_create_title"
+        app:layout_constraintBottom_toBottomOf="@+id/spSettingTextSizeCreateDatetime"
+        app:layout_constraintStart_toEndOf="@+id/spSettingTextSizeCreateDatetime"
+        app:layout_constraintTop_toTopOf="@+id/spSettingTextSizeCreateDatetime" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeCreateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeCreateTitle"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeCreateTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeCreateTitle" />
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeCreateBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/tv_setting_text_size_main_and_create_body"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeCreateTitle"
+        app:layout_constraintStart_toEndOf="@+id/spSettingTextSizeCreateTitle" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeCreateBody"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeCreateBody"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeCreateBody"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeCreateBody" />
+
+
+    <TextView
+        android:id="@+id/tvSettingTextSizeCreateDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/tv_setting_text_size_main_and_create_datetime"
+        app:layout_constraintEnd_toEndOf="@+id/tvSettingTextSizeCreate"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingTextSizeCreate" />
+
+    <Spinner
+        android:id="@+id/spSettingTextSizeCreateDatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_text_size"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingTextSizeCreateDatetime"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingTextSizeCreateDatetime"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingTextSizeCreateDatetime" />
+
+    <View
+        android:id="@+id/line_vertical_horizontal1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/borderColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingTextSizeCreateDatetime" />
+
+    <TextView
+        android:id="@+id/tvSettingMaxLinesMainBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tv_setting_maxlines_main_body"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_vertical_horizontal1" />
+
+    <Spinner
+        android:id="@+id/spSettingMaxLinesMainBody"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sp_setting_maxlines_main_body"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingMaxLinesMainBody"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingMaxLinesMainBody"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingMaxLinesMainBody" />
+
+    <View
+        android:id="@+id/line_vertical_horizontal2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/borderColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingMaxLinesMainBody" />
+
+    <TextView
+        android:id="@+id/tvSettingUndoMax"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tv_setting_undo_max"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_vertical_horizontal2" />
+
+    <Spinner
+        android:id="@+id/spSettingUndoMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/sp_setting_undo_max"
+        android:gravity="end"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSettingUndoMax"
+        app:layout_constraintStart_toEndOf="@+id/tvSettingUndoMax"
+        app:layout_constraintTop_toTopOf="@+id/tvSettingUndoMax"
+        app:layout_constraintVertical_bias="1.0" />
+    <!--
+    <View
+        android:id="@+id/line_vertical_horizontal3"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/borderColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:text="@string/tv_setting_theme"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingUndoMax" />
+
+    <RadioGroup
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/rb_setting_theme_light" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="@string/rb_setting_theme_dark" />
+    </RadioGroup>
+    -->
+
+    <View
+        android:id="@+id/line_vertical_horizontal4"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/borderColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingUndoMax" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="clearSettings"
+        android:text="@string/bt_setting_clear_button"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/line_vertical_horizontal4" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="saveSettings"
+        android:text="@string/bt_setting_save_button"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_vertical_horizontal4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,148 @@
+<resources>
+    <string name="app_name">NS Memo</string>
+
+    <!-- 一覧画面　アクティブバー -->
+    <string name="menu_main_option_add">新規作成</string>
+
+    <!-- 日時取得用 -->
+    <string name="date_format">yyyy-MM-dd HH:mm:ss</string>
+    <string name="date_f">%Y - %m - %d</string>
+    <string name="week_f">%w</string>
+    <string name="time_f">%H:%M:%S</string>
+    <string-array name="week">
+        <item>（日）</item>
+        <item>（月）</item>
+        <item>（火）</item>
+        <item>（水）</item>
+        <item>（木）</item>
+        <item>（金）</item>
+        <item>（土）</item>
+    </string-array>
+
+    <string name="main_tv_clock">\e94e</string>
+
+    <!-- 記事削除ダイアログ -->
+    <string name="delete_dialog_fragment_header">このメモを完全に削除しますか？</string>
+    <string name="delete_dialog_fragment_ok">OK</string>
+    <string name="delete_dialog_fragment_toast_ok">選択したメモを完全に削除しました。</string>
+    <string name="delete_dialog_fragment_cancel">キャンセル</string>
+    <string name="delete_dialog_fragment_toast_cancel">キャンセルしました。</string>
+
+
+    <!-- ListLongClickDialogFragment -->
+    <string name="list_long_click_dialog_fragment_header">メニュー</string>
+    <string name="list_long_click_dialog_fragment_categiryset_title">カテゴリ選択：</string>
+    <string name="list_long_click_dialog_fragment_atv_categiryset_hint">既存選択 or 新規入力</string>
+    <string name="list_long_click_dialog_fragment_bt_categiryset_set">登録</string>
+    <string name="list_long_click_dialog_fragment_toast_categiryset">カテゴリ「　</string>
+    <string name="list_long_click_dialog_fragment_toast_categiryset_set">　」に登録しました。</string>
+    <string name="list_long_click_dialog_fragment_bt_categiryset_remove">解除</string>
+    <string name="list_long_click_dialog_fragment_toast_categiryset_remove">　」を解除しました。</string>
+    <string name="list_long_click_dialog_fragment_bt_body_copy">本文コピー</string>
+    <string name="list_long_click_dialog_fragment_toast_body_copy">選択したメモの本文をコピーしました。</string>
+    <string name="list_long_click_dialog_fragment_bt_duplication">メモ複製</string>
+    <string name="list_long_click_dialog_fragment_toast_duplication">選択したメモを複製しました。</string>
+    <string name="list_long_click_dialog_fragment_bt_trash">ゴミ箱へ移動</string>
+    <string name="list_long_click_dialog_fragment_toast_trash">選択したメモをゴミ箱へ移動しました。</string>
+    <string name="list_long_click_dialog_fragment_bt_rescue">ゴミ箱から出す</string>
+    <string name="list_long_click_dialog_fragment_toast_rescue">選択したメモをゴミ箱から出しました。</string>
+    <string name="list_long_click_dialog_fragment_bt_delete">完全に削除</string>
+
+    <!-- カテゴリ -->
+    <string name="navigation_view_menu_trash">ゴミ箱</string>
+
+
+    <!-- カテゴリ編集ダイアログ -->
+    <string name="edit_category_dialog_fragment_tv_header">カテゴリ編集</string>
+    <string name="edit_category_dialog_fragment_et_hint">新規入力=>[作成] or 既存選択=>[削除]</string>
+    <string name="edit_category_dialog_fragment_bt_add">作成</string>
+    <string name="edit_category_dialog_fragment_toast_add">カテゴリを作成しました。</string>
+    <string name="edit_category_dialog_fragment_bt_delete">削除</string>
+    <string name="edit_category_dialog_fragment_toast_delete">カテゴリを削除しました。</string>
+    <string name="edit_category_dialog_fragment_bt_cancel">キャンセル</string>
+    <string name="edit_category_dialog_fragment_toast_cancel">キャンセルしました。</string>
+
+
+    <!-- 記事編集画面　アクティブバー -->
+    <string name="menu_create_title_edit">編集画面</string>
+    <string name="menu_create_title_save">確認画面</string>
+    <string name="menu_create_option_save">保存</string>
+    <string name="menu_create_option_edit">編集</string>
+    <string name="menu_create_option_finish">完了</string>
+    <!-- 記事編集画面　日時部分 -->
+    <string name="layout_tv_update">LAST UPDATE：</string>
+    <string name="layout_tv_create_date">CREATE DATE：</string>
+    <!-- 記事編集画面　入力フォーム仮テキスト -->
+    <string name="et_title_hint_string">Title</string>
+    <string name="et_body_hint_string">Memo</string>
+
+
+    <!-- 設定画面　アクティブバー -->
+    <string name="setting_title">設定画面</string>
+    <!-- 設定画面　各項目 -->
+    <string name="tv_setting_text_size">文字サイズ</string>
+    <string name="tv_setting_text_size_main">一覧画面</string>
+    <string name="tv_setting_text_size_create">記事画面</string>
+    <string name="tv_setting_text_size_main_and_create_title">タイトル:</string>
+    <string name="tv_setting_text_size_main_and_create_body">本文:</string>
+    <string name="tv_setting_text_size_main_and_create_datetime">日時:</string>
+    <string-array name="sp_setting_text_size">
+        <item>9</item>
+        <item>10</item>
+        <item>10.5</item>
+        <item>11</item>
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+        <item>20</item>
+        <item>22</item>
+        <item>24</item>
+        <item>26</item>
+        <item>28</item>
+        <item>30</item>
+    </string-array>
+
+
+    <string name="tv_setting_maxlines_main_body">一覧画面の本文表示行数:</string>
+    <string-array name="sp_setting_maxlines_main_body">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+
+
+    <string name="tv_setting_undo_max">入力取り消し最大回数:</string>
+    <string-array name="sp_setting_undo_max">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+    </string-array>
+
+    <string name="tv_setting_theme">テーマ</string>
+    <string name="rb_setting_theme_light">ライト</string>
+    <string name="rb_setting_theme_dark">ダーク</string>
+
+    <string name="bt_setting_save_button">設定を保存</string>
+    <string name="bt_setting_clear_button">初期値に戻す</string>
+
+
+
+    <string name="typeface_bold">"meiryob.ttc"</string>
+    <string name="typeface_icon">"icon.ttf"</string>
+
+</resources>

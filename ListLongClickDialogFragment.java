@@ -10,9 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -49,7 +47,7 @@ public class ListLongClickDialogFragment extends DialogFragment {
         _helper = new MyOpenHelper(getActivity());        // データベース・オープンヘルパー取得。
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());   // ダイアログビルダー取得。
-        builder.setTitle(R.string.list_long_click_dialog_fragment_header);                                            // ビルダーにタイトルをセット。
+//        builder.setTitle(R.string.list_long_click_dialog_fragment_header);                                            // ビルダーにタイトルをセット。
         builder.setView(_listLongClickDialogFragmentView);                      // ビルダーにListLongClickDialogFragmentのビューをセット。
         AlertDialog dialog = builder.create();                                  // ダイアログ生成。
 
@@ -58,6 +56,10 @@ public class ListLongClickDialogFragment extends DialogFragment {
             List<Category> categoryList = categoryDao.getCategoryList();                                         // カテゴリリスト取得。
             _atvCategories = _listLongClickDialogFragmentView.findViewById(R.id.atvCategories);                  // カテゴリ選択欄取得。
             setAutoCompleteTextView(categoryList);                                                               // カテゴリ選択欄にカテゴリリストセット。
+            if(categoryList.size() > 7) {
+                float ratioOfDpToPx = getResources().getDisplayMetrics().density;        // dpからpxへ変換するための比率。
+                _atvCategories.setDropDownHeight( (int)(384 * ratioOfDpToPx + 0.5f) );   // px値でサイズ設定。
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -105,12 +107,12 @@ public class ListLongClickDialogFragment extends DialogFragment {
                         ItemCategoryIdDao itemCategoryIdDao = new ItemCategoryIdDao(_helper)) {
 
                         int categoryId = categoryDao.getCategoryIdByName(_atvCategories.getText().toString());   // カテゴリ選択欄のカテゴリ名からカテゴリIDを取得。
-                        itemCategoryIdDao.addItemCategoryId(new ItemCategoryId(_memoId, categoryId));            // タップされたメモIDとカテゴリIDの組み合わせをデータベースに登録。
+                        itemCategoryIdDao.addItemCategoryId(new ItemCategoryId(categoryId, _memoId));            // タップされたメモIDとカテゴリIDの組み合わせをデータベースに登録。
 
                         StringBuilder stringBuilder = new StringBuilder(25);
-                        stringBuilder.append(getResources().getString(R.string.list_long_click_dialog_fragment_toast_categiryset));          // 文字列結合。
+                        stringBuilder.append(getString(R.string.list_long_click_dialog_fragment_toast_categiryset));          // 文字列結合。
                         stringBuilder.append(_atvCategories.getText().toString());
-                        stringBuilder.append(getResources().getString(R.string.list_long_click_dialog_fragment_toast_categiryset_set));
+                        stringBuilder.append(getString(R.string.list_long_click_dialog_fragment_toast_categiryset_set));
                         Toast.makeText(getActivity(), stringBuilder.toString(), Toast.LENGTH_SHORT).show();
 
                     } catch (SQLException e) {
@@ -128,12 +130,12 @@ public class ListLongClickDialogFragment extends DialogFragment {
                         ItemCategoryIdDao itemCategoryIdDao = new ItemCategoryIdDao(_helper)) {
 
                         int categoryId = categoryDao.getCategoryIdByName(_atvCategories.getText().toString());    // カテゴリ選択欄のカテゴリ名からカテゴリIDを取得。
-                        itemCategoryIdDao.removeItemCategoryIdByMemoId(new ItemCategoryId(_memoId, categoryId));  // タップされたメモIDとカテゴリIDの組み合わせをデータベースから削除。
+                        itemCategoryIdDao.removeItemCategoryIdByMemoId(new ItemCategoryId(categoryId, _memoId));  // タップされたメモIDとカテゴリIDの組み合わせをデータベースから削除。
 
                         StringBuilder stringBuilder = new StringBuilder(255);
-                        stringBuilder.append(getResources().getString(R.string.list_long_click_dialog_fragment_toast_categiryset));          // 文字列結合。
+                        stringBuilder.append(getString(R.string.list_long_click_dialog_fragment_toast_categiryset));          // 文字列結合。
                         stringBuilder.append(_atvCategories.getText().toString());
-                        stringBuilder.append(getResources().getString(R.string.list_long_click_dialog_fragment_toast_categiryset_remove));
+                        stringBuilder.append(getString(R.string.list_long_click_dialog_fragment_toast_categiryset_remove));
                         Toast.makeText(getActivity(), stringBuilder.toString(), Toast.LENGTH_SHORT).show();
 
                     } catch (SQLException e) {
@@ -234,9 +236,9 @@ public class ListLongClickDialogFragment extends DialogFragment {
         // カテゴリ選択欄にフォーカスチェンジリスナセット。
         _atvCategories.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b) {
-                    //_atvCategories.showDropDown();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {                                         // カテゴリ選択欄にフォーカスが合った時・・・・・・
+                    _atvCategories.showDropDown();                      // カテゴリリスト表示。
                 }
             }
         });
@@ -247,20 +249,8 @@ public class ListLongClickDialogFragment extends DialogFragment {
                 _atvCategories.showDropDown();                          // カテゴリ選択欄タップでカテゴリリスト表示。
             }
         });
-        // カテゴリ選択欄にタッチリスナセット。
-        _atvCategories.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-//                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                }
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-                return false;
-            }
 
-        });
     }
 
 
